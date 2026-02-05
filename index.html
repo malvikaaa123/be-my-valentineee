@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    .options button {
+      width: 80%;
+      margin: 10px auto;
+      display: block;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: #ff4d6d;
+      color: white;
+      transition: 0.2s;
+    }
+
+    .options button:hover {
+      background: #e63950;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #noBtn {
+      background: #999;
+      position: relative;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ff4d6d;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- QUIZ -->
+  <div id="quiz">
+    <h1>💖 Valentine Quiz 💖</h1>
+    <p id="questionText"></p>
+
+    <div class="options">
+      <button onclick="nextQuestion()">Me 😌</button>
+      <button onclick="nextQuestion()">You 😏</button>
+    </div>
+  </div>
+
+  <!-- FINAL QUESTION -->
+  <div id="valentine" class="hidden">
+    <h1>One last question… 🌹</h1>
+    <p>Will you be my Valentine?</p>
+
+    <button onclick="yesClicked()">YES 💘</button>
+    <button id="noBtn" onclick="noClicked()">NO 😐</button>
+
+    <p class="message" id="noMessage"></p>
+  </div>
+
+  <!-- YES SCREEN -->
+  <div id="yesScreen" class="hidden">
+    <h1>YAYYYY 💕</h1>
+    <p>You’re officially my Valentine 🥰</p>
+    <p>I love you. Always. 💖</p>
+  </div>
+
+</div>
+
+<script>
+  const questions = [
+    "Who eats faster — Me or You?",
+    "Who’s more likely to nap ‘just for 10 minutes’ and it turns into an hour?",
+    "Who would survive longer in a zombie apocalypse — Me or You?",
+    "Who apologises first after a fight — Me or You?",
+    "Who is worse at replying on time — Me or You?",
+    "Who plans dates in an instant — Me or You?",
+    "Who remembers every little detail about our first date — Me or You?",
+    "Who cries more when we have to say goodbye for a while — Me or You?",
+    "Who drives the other crazier (in a good way) — Me or You?",
+    "Who is luckier to have the other — Me or You?"
+  ];
+
+  let current = 0;
+  const questionText = document.getElementById("questionText");
+
+  questionText.innerText = questions[current];
+
+  function nextQuestion() {
+    current++;
+    if (current < questions.length) {
+      questionText.innerText = questions[current];
+    } else {
+      document.getElementById("quiz").classList.add("hidden");
+      document.getElementById("valentine").classList.remove("hidden");
+    }
+  }
+
+  const noExcuses = [
+    "❌ Error 404: No not found",
+    "💖 The system has already decided",
+    "🔐 This option is locked because I love you",
+    "😌 You really thought you had a choice?",
+    "💍 Valentine already assigned"
+  ];
+
+  function noClicked() {
+    const msg = noExcuses[Math.floor(Math.random() * noExcuses.length)];
+    document.getElementById("noMessage").innerText = msg;
+
+    const noBtn = document.getElementById("noBtn");
+    noBtn.style.top = Math.random() * 80 - 40 + "px";
+    noBtn.style.left = Math.random() * 80 - 40 + "px";
+  }
+
+  function yesClicked() {
+    document.getElementById("valentine").classList.add("hidden");
+    document.getElementById("yesScreen").classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>
